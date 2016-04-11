@@ -1,0 +1,17 @@
+<h1>approve these ... or not
+<%=  current_user.email if current_user %>
+</h1>
+<% if current_user %>
+<div class="">
+<% @articles.each do |article| %>
+  <%= render 'shared/post', :article => article %>
+  <div>
+    <button class="btn btn-success" onClick="approve(<%=article.id%>);">Approve</button>
+    <button class="btn btn-danger" onClick="delete(<%=article.id%>);">Delete</button>
+  </div>
+</div>
+<br><br>
+<% end %>
+<% else %>
+not logged in
+<% end %>
