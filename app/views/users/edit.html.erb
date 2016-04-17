@@ -1,1 +1,26 @@
 <h1>Manage users</h1>
+
+<% if current_user %>
+    <% @users.each do |user| %>
+        <div id="<%= user.id %>">
+            <div>
+                <%= user.email %> 
+                <% if user.adminflag and user.adminflag > 0 %>
+                ADMIN 
+                <%else %>
+                NON-ADMIN
+                <% end %>
+                <% if user.adminflag and user.adminflag > 0 %>
+                    <button class="btn btn-success" onClick="promote(<%=user.id%>);">Make Admin</button>
+                <% end %>
+                <% if (user.adminflag and user.adminflag > 0) or user.id = current_user.id %>
+                    <button class="btn btn-danger" onClick="destroy(<%=user.id%>);">Delete</button>
+                <% end %>
+                <br />
+                <br />
+            </div>
+        </div>
+    <%end%>
+<% else %>
+    You don't have permissions to do this...
+<% end %>

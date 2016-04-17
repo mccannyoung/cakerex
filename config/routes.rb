@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :articles 
-  resources :users
+  resources :articles
+  resources :users, :except => [:show]
   #get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   post 'articles/approve' => 'articles#approve'
   post 'articles/delete' => 'articles#delete'
   
-  get '/users/edit' => 'users#editrra'
+  post 'users/promote' => 'users#promote'
+  post 'users/delete' => 'users#delete'
+
+  get '/users/edit' => 'users#edit'
   
   get "/log-in" => "sessions#new"
   post "/log-in" => "sessions#create"

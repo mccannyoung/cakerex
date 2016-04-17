@@ -14,6 +14,11 @@ class ArticlesController < ApplicationController
     
     def create
         @article = Article.new(article_params_create) 
+        if @current_user 
+            @article.userid = @current_user.id
+        else
+            @article.userid = -1
+        end
         @article.approval = :false
         if @article.save
             redirect_to @article
@@ -40,11 +45,21 @@ class ArticlesController < ApplicationController
     
     def delete
         Article.find(params[:id]).destroy
-        redirect_to :action => 'index'
+          render :json => { 
+               :id => params[:id]
+            }
     end
     
     def admin
-         @articles = Article.where(:approval => [false, nil]).order(created_at: :desc)
+        if (current_user.adminflag > 0)
+            @articles = Article.where(:approval => [false, nil]).order(created_at: :desc)
+        else 
+            if current_user
+                @articles = Article.where(:userid => current_user.id).order(created_at: :desc)
+            else
+                @articles = nil
+            end
+        end
     end
     
     private

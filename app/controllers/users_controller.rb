@@ -7,7 +7,7 @@ end
 def create
 
     @user = User.new(user_params)
-    @user.admin = 0
+    @user.adminflag = 0
     
     if @user.save
     
@@ -25,12 +25,30 @@ def create
 end
 
  def edit
-     
-     @users = User.all
- 
+    @users = User.all
  end
  
+ def promote
+    @user = User.find(params[:id]) 
+    @user.adminflag = 1
+    
+    if @user.save
+        render :json => { 
+           :id => @user.id
+        }
+    else
+        render :json =>{
+            :id=>"-1"
+        }
+    end 
+ end
 
+def delete
+    User.find(params[:id]).destroy
+      render :json => { 
+           :id => params[:id]
+        }
+end
 
 private
 

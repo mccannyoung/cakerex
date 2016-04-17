@@ -1,19 +1,19 @@
-<%=form_for User.new do |f| %>
+<%=form_for User.new, :html => {:class => "form-horizontal center"} do |f| %>
 
 <%=f.label :email %>
 
-<%=f.text_field :email %>
+<%=f.text_field :email, class: "form-control"  %>
 <br />
 
 <%=f.label :password %>
 
-<%=f.password_field :password %>
+<%=f.password_field :password, class: "form-control"  %>
 
 <br />
 
 <%=f.label :password_confirmation %>
 
-<%=f.password_field :password_confirmation %>
+<%=f.password_field :password_confirmation, class: "form-control"  %>
 
 <br />
 

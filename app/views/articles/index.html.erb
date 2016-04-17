@@ -1,5 +1,15 @@
 <h1>Most Recent REX</h1>
  
 <% @articles.each do |article| %>
+<div id="<%= article.id %>">
   <%= render 'shared/post', :article => article %>
+  <div>
+    <% if current_user %>
+      <button class="btn btn-danger" onClick="destroy(<%=article.id%>);">Delete</button>
+      <br />
+      <br />
+    <%end%>
+  </div>
+  
+  </div>
 <% end %>
