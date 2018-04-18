@@ -2,14 +2,18 @@ class ArticlesController < ApplicationController
     
     def index
         @articles = Article.where(approval: true).order(created_at: :desc)
+        render :json => @articles 
+        
     end
     
     def show
         @article = Article.find(params[:id])
+        render :json => @article
     end
     
     def new
         @article = Article.new
+        render :json => @article
     end
     
     def create
